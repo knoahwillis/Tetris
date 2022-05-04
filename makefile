@@ -1,26 +1,28 @@
 PNAME := Tetris
 
 PCXXSRC := $(wildcard src/*.cpp)
+PCXXSRC += $(wildcard src/BoardPieces/*.cpp)
 
-PCXXOBJ := $(PCXXSRC:.cpp=.o)
-
-CXXFLAGS += -std=c++11 -O2 -g -Wall -Wpedantic
-
-LDLIBS += 
-
-LDFLAGS += -lSDL2
+PCXXOBJS := $(PCXXSRC:src/%.cpp=build/%.o)
 
 CC := g++
 
-.PHONY: all clean 
+CXXFLAGS += -std=c++17 -O2 -g
+LDLIBS += -lSDL2
+LDFLAGS +=
 
-all: $(PCXXOBJ)
-	$(CC) $(LDLIBS) $(PCXXOBJ) $(LDFLAGS) -o $(PNAME)
-	$(RM) $(PCXXOBJ)
+.PHONY: all make_build_dirs clean
 
-%.o: %.cpp
-	$(CC) -c $< $(CXXFLAGS) -o $@
+all: make_build_dirs $(PCXXOBJS)
+	$(CC) $(LDFLAGS) $(PCXXOBJS) -o $(PNAME) $(LDLIBS)
+
+$(PCXXOBJS): build/%.o: src/%.cpp
+	$(CC) $(CXXFLAGS) -c $< -o $@
+
+make_build_dirs:
+	mkdir -p build/
+	mkdir -p build/BoardPieces
 
 clean:
-	$(RM) $(PNAME) 
-	$(RM) src/*.o
+	$(RM) -r build/
+	$(RM) $(PNAME)
