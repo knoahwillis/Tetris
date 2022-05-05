@@ -11,10 +11,12 @@ Game::Game(int h, int w) {
     rend = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED);
 
     title = new Title;
+    score = new Score;
 }
 
 Game::~Game() {
     delete title;
+    delete score;
 
     SDL_DestroyRenderer(rend);
     SDL_DestroyWindow(window);
@@ -42,7 +44,8 @@ void Game::render() {
         SDL_SetRenderDrawColor(rend, 0, 0, 0, 255);
         SDL_RenderClear(rend);
 
-        title->render(rend, width / 2.0 - 170, 25);
+        title->render(rend, width / 2 - 170, 25);
+        score->render(rend, width / 2 - 300, 100);
 
         this->turn();
 

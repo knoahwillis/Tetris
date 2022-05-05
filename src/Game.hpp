@@ -1,5 +1,7 @@
 #pragma once
 #include "BoardPieces/Title.hpp"
+#include "BoardPieces/Score.hpp"
+
 
 class Game {
     int height, width;
@@ -10,7 +12,7 @@ class Game {
     SDL_Window* window;
 
     // GameBoard* game;
-    // ScoreBoard* score;
+    Score* score;
     Title* title;
     // Hold* hold;
     // Next* next;
@@ -20,7 +22,7 @@ public:
     ~Game();
 
     bool endGame();
-    
+
     void turn();
 
     void render();
