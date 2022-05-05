@@ -13,14 +13,15 @@ void Title::render(SDL_Renderer* rend, int xOffset, int yOffset) {
             for (int x = 0; x < 4; x++) {
                 if (text[i][4 * y + x] == 1) {
                     SDL_Rect r;
-                    r.x = xOffset + x ;
-                    r.y = yOffset + y ;
-                    r.w = 5;
-                    r.h = 5;
+                    r.x = xOffset + x * 10;
+                    r.y = yOffset + y * 10;
+                    r.w = 10;
+                    r.h = 10;
 
                     SDL_RenderFillRect(rend, &r);
                 }
             }
         }
+        xOffset += 60;
     }
 }

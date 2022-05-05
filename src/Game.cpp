@@ -42,7 +42,7 @@ void Game::render() {
         SDL_SetRenderDrawColor(rend, 0, 0, 0, 255);
         SDL_RenderClear(rend);
 
-        title->render(rend, width / 2.0 - 85, 25);
+        title->render(rend, width / 2.0 - 170, 25);
 
         this->turn();
 
