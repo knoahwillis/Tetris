@@ -1,6 +1,7 @@
 #pragma once
-#include "BoardPieces/Title.hpp"
 #include "BoardPieces/Score.hpp"
+#include "BoardPieces/Title.hpp"
+#include "BoardPieces/Next.hpp"
 
 
 class Game {
@@ -12,10 +13,10 @@ class Game {
     SDL_Window* window;
 
     // GameBoard* game;
-    Score* score;
     Title* title;
+    Score* score;
+    Next* next;
     // Hold* hold;
-    // Next* next;
 
 public:
     Game(int h, int w);
