@@ -6,13 +6,11 @@ Game::Game(int h, int w) {
 
     running = true;
 
-    running = true;
-
     SDL_Init(SDL_INIT_VIDEO);
     window = SDL_CreateWindow("Tetris", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, width, height, SDL_WINDOW_SHOWN);
     rend = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED);
 
-    title = new Title; 
+    title = new Title;
 }
 
 Game::~Game() {
@@ -23,11 +21,31 @@ Game::~Game() {
     SDL_Quit();
 }
 
+bool Game::endGame(){
+    return running;
+}
+
+void Game::turn() {
+    SDL_Event e;
+
+    while (SDL_PollEvent(&e)) {
+        switch (e.type) {
+        case SDL_QUIT:
+            running = false;
+            break;
+        }
+    }
+}
+
 void Game::render() {
-    SDL_SetRenderDrawColor(rend, 0, 0, 0, 255);
-    SDL_RenderClear(rend);
+    while (running) {
+        SDL_SetRenderDrawColor(rend, 0, 0, 0, 255);
+        SDL_RenderClear(rend);
 
-    title->render(rend, width / 2.0 - 85, 25);
+        title->render(rend, width / 2.0 - 85, 25);
 
-    SDL_RenderPresent(rend);
+        this->turn();
+
+        SDL_RenderPresent(rend);
+    }
 }

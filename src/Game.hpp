@@ -19,7 +19,9 @@ public:
     Game(int h, int w);
     ~Game();
 
-    void render();
-
+    bool endGame();
+    
     void turn();
+
+    void render();
 };
