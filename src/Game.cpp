@@ -16,7 +16,7 @@ Game::Game(int h, int w) {
     next = new Next;
     hold = new Hold;
 
-    pieces.push_back(new I);
+    pieces.push_back(new L);
 }
 
 Game::~Game() {
@@ -35,7 +35,7 @@ Game::~Game() {
     SDL_Quit();
 }
 
-bool Game::endGame() { return running; }
+bool Game::endGame() { return !running; }
 
 void Game::turn() {
     SDL_Event e;
@@ -53,12 +53,15 @@ void Game::turn() {
             case SDL_SCANCODE_D:
                 pieces.back()->moveRight();
                 break;
+            case SDL_SCANCODE_SPACE:
+                pieces.back()->moveDownFast();
+                break;
             }
         }
     }
 
-    for(int i = 0; i < pieces.size(); i++){
-        if(!pieces[i]->isDown){
+    for (int i = 0; i < pieces.size(); i++) {
+        if (!pieces[i]->isDown) {
             pieces[i]->moveDown();
         }
     }
@@ -74,7 +77,7 @@ void Game::render() {
         score->render(rend, width / 2 - 300, 100);
         next->render(rend, width - 200, 100);
         hold->render(rend, width / 2 - 290, 250);
-        for(int i = 0; i < pieces.size(); i++){
+        for (int i = 0; i < pieces.size(); i++) {
             pieces[i]->render(rend);
         }
 

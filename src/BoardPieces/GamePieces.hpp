@@ -8,6 +8,7 @@ class Piece {
 protected:
     std::array<int, 3> color;
     std::array<SDL_Rect, 4> piece;
+
 public:
     bool isDown;
     Piece();
@@ -16,8 +17,9 @@ public:
     void moveRight();
     void moveLeft();
     void moveDown();
+    void moveDownFast();
 
-    void render(SDL_Renderer *rend);
+    void render(SDL_Renderer* rend);
 };
 
 class I : public Piece {
@@ -25,14 +27,32 @@ public:
     I();
 };
 
-class O : public Piece {};
+class O : public Piece {
+public:
+    O();
+};
 
-class T : public Piece {};
+class T : public Piece {
+public:
+    T();
+};
 
-class S : public Piece {};
+class S : public Piece {
+public:
+    S();
+};
 
-class Z : public Piece {};
+class Z : public Piece {
+public:
+    Z();
+};
 
-class J : public Piece {};
+class J : public Piece {
+public:
+    J();
+};
 
-class L : public Piece {};
+class L : public Piece {
+public:
+    L();
+};
