@@ -16,7 +16,7 @@ Game::Game(int h, int w) {
     next = new Next;
     hold = new Hold;
 
-    pieces.push_back(new L);
+    pieces.push_back(new I);
 }
 
 Game::~Game() {
@@ -56,6 +56,11 @@ void Game::turn() {
             case SDL_SCANCODE_SPACE:
                 pieces.back()->moveDownFast();
                 break;
+            case SDL_SCANCODE_Q:
+                pieces.back()->rotateRight();
+                break;
+            case SDL_SCANCODE_E:
+                pieces.back()->rotateLeft();
             }
         }
     }

@@ -1,5 +1,4 @@
 #pragma once
-#include "../Color.hpp"
 #include <SDL2/SDL.h>
 #include <array>
 #include <tuple>
@@ -7,7 +6,8 @@
 class Piece {
 protected:
     std::array<int, 3> color;
-    std::array<SDL_Rect, 4> piece;
+    std::array<std::array<SDL_Rect, 4>, 4> piece;
+    int pieceOrientation;
 
 public:
     bool isDown;
@@ -19,6 +19,9 @@ public:
     void moveDown();
     void moveDownFast();
 
+    void rotateLeft();
+    void rotateRight();
+
     void render(SDL_Renderer* rend);
 };
 
@@ -27,32 +30,32 @@ public:
     I();
 };
 
-class O : public Piece {
-public:
-    O();
-};
+// class O : public Piece {
+// public:
+//     O();
+// };
 
-class T : public Piece {
-public:
-    T();
-};
+// class T : public Piece {
+// public:
+//     T();
+// };
 
-class S : public Piece {
-public:
-    S();
-};
+// class S : public Piece {
+// public:
+//     S();
+// };
 
-class Z : public Piece {
-public:
-    Z();
-};
+// class Z : public Piece {
+// public:
+//     Z();
+// };
 
-class J : public Piece {
-public:
-    J();
-};
+// class J : public Piece {
+// public:
+//     J();
+// };
 
-class L : public Piece {
-public:
-    L();
-};
+// class L : public Piece {
+// public:
+//     L();
+// };
