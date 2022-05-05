@@ -2,6 +2,7 @@
 #include "BoardPieces/Score.hpp"
 #include "BoardPieces/Title.hpp"
 #include "BoardPieces/Next.hpp"
+#include "BoardPieces/Hold.hpp"
 
 
 class Game {
@@ -16,7 +17,7 @@ class Game {
     Title* title;
     Score* score;
     Next* next;
-    // Hold* hold;
+    Hold* hold;
 
 public:
     Game(int h, int w);

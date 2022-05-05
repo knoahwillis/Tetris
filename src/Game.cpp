@@ -13,12 +13,14 @@ Game::Game(int h, int w) {
     title = new Title;
     score = new Score;
     next = new Next;
+    hold = new Hold;
 }
 
 Game::~Game() {
     delete title;
     delete score;
     delete next;
+    delete hold;
 
     SDL_DestroyRenderer(rend);
     SDL_DestroyWindow(window);
@@ -47,6 +49,7 @@ void Game::render() {
         title->render(rend, width / 2 - 170, 25);
         score->render(rend, width / 2 - 300, 100);
         next->render(rend, width - 200, 100);
+        hold->render(rend, width / 2 - 290, 250);
 
         this->turn();
 
