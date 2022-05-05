@@ -1,7 +1,7 @@
 #pragma once
 #include <SDL2/SDL.h>
 #include <array>
-#include <tuple>
+#include <vector>
 
 class Piece {
 protected:
@@ -10,14 +10,15 @@ protected:
     int pieceOrientation;
 
 public:
+    int bottom = 0;
     bool isDown;
+
     Piece();
     ~Piece();
 
     void moveRight();
     void moveLeft();
     void moveDown();
-    void moveDownFast();
 
     void rotateLeft();
     void rotateRight();
@@ -30,10 +31,10 @@ public:
     I();
 };
 
-// class O : public Piece {
-// public:
-//     O();
-// };
+class O : public Piece {
+public:
+    O();
+};
 
 // class T : public Piece {
 // public:

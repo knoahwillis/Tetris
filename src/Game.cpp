@@ -1,4 +1,5 @@
 #include "Game.hpp"
+#include <iostream>
 
 Game::Game(int h, int w) {
     height = h;
@@ -16,7 +17,7 @@ Game::Game(int h, int w) {
     next = new Next;
     hold = new Hold;
 
-    pieces.push_back(new I);
+    pieces.push_back(new O);
 }
 
 Game::~Game() {
@@ -53,22 +54,27 @@ void Game::turn() {
             case SDL_SCANCODE_D:
                 pieces.back()->moveRight();
                 break;
-            case SDL_SCANCODE_SPACE:
-                pieces.back()->moveDownFast();
-                break;
             case SDL_SCANCODE_Q:
                 pieces.back()->rotateRight();
                 break;
             case SDL_SCANCODE_E:
                 pieces.back()->rotateLeft();
+                break;
+            case SDL_SCANCODE_SPACE:
+                pieces.back()->isDown = true;
+                pieces.back()->moveDown();
+                break;
             }
         }
     }
-
-    for (int i = 0; i < pieces.size(); i++) {
-        if (!pieces[i]->isDown) {
-            pieces[i]->moveDown();
+    for (int i = 0; i < 10; i++) {
+        if (pieces.back()->bottom + 15 >= game->ground[i]) {
+            pieces.back()->isDown = true;
         }
+    }
+
+    if (!pieces.back()->isDown) {
+        pieces.back()->moveDown();
     }
 }
 
@@ -76,6 +82,10 @@ void Game::render() {
     while (running) {
         SDL_SetRenderDrawColor(rend, 0, 0, 0, 255);
         SDL_RenderClear(rend);
+
+        SDL_SetRenderDrawColor(rend, 255, 255, 255, 255);
+        SDL_Rect test{500, 715, 30, 30};
+        SDL_RenderFillRect(rend, &test);
 
         game->render(rend, width / 2 - 130, 115);
         title->render(rend, width / 2 - 170, 25);

@@ -3,7 +3,7 @@
 void Piece::moveRight() {
     for (int i = 0; i < 4; i++) {
         for (int j = 0; j < 4; j++) {
-            piece[j][i].y += 30;
+            piece[j][i].x += 30;
         }
     }
 }
@@ -11,7 +11,7 @@ void Piece::moveRight() {
 void Piece::moveLeft() {
     for (int i = 0; i < 4; i++) {
         for (int j = 0; j < 4; j++) {
-            piece[j][i].y += 30;
+            piece[j][i].x -= 30;
         }
     }
 }
@@ -21,13 +21,8 @@ void Piece::moveDown() {
         for (int j = 0; j < 4; j++) {
             piece[j][i].y += 1;
         }
-    }
-}
-
-void Piece::moveDownFast() {
-    for (int i = 0; i < 4; i++) {
-        for (int j = 0; j < 4; j++) {
-            piece[j][i].y += 1;
+        if (piece[pieceOrientation][i].y > bottom) {
+            bottom = piece[pieceOrientation][i].y + 30;
         }
     }
 }
@@ -65,18 +60,18 @@ Piece::~Piece() {}
 I::I() {
     color = {0, 165, 165};
     piece[0] = {SDL_Rect{360, 114, 30, 30}, SDL_Rect{390, 114, 30, 30}, SDL_Rect{420, 114, 30, 30}, SDL_Rect{450, 114, 30, 30}};
-    piece[1] = {SDL_Rect{390, 114, 30, 30}, SDL_Rect{390, 84, 30, 30}, SDL_Rect{390, 144, 30, 30}, SDL_Rect{390, 54, 30, 30}};
+    piece[1] = {SDL_Rect{390, 114, 30, 30}, SDL_Rect{390, 84, 30, 30}, SDL_Rect{390, 144, 30, 30}, SDL_Rect{390, 174, 30, 30}};
     piece[2] = {SDL_Rect{360, 114, 30, 30}, SDL_Rect{390, 114, 30, 30}, SDL_Rect{420, 114, 30, 30}, SDL_Rect{450, 114, 30, 30}};
     piece[3] = {SDL_Rect{390, 114, 30, 30}, SDL_Rect{390, 84, 30, 30}, SDL_Rect{390, 144, 30, 30}, SDL_Rect{390, 54, 30, 30}};
 }
 
-// O::O() {
-//     color = {255, 255, 0};
-//     piece[0] = SDL_Rect{390, 114, 30, 30};
-//     piece[1] = SDL_Rect{390, 84, 30, 30};
-//     piece[2] = SDL_Rect{420, 84, 30, 30};
-//     piece[3] = SDL_Rect{420, 114, 30, 30};
-// }
+O::O() {
+    color = {255, 255, 0};
+    piece[0] = {SDL_Rect{390, 114, 30, 30}, SDL_Rect{390, 84, 30, 30}, SDL_Rect{420, 84, 30, 30}, SDL_Rect{420, 114, 30, 30}};
+    piece[1] = piece[0];
+    piece[2] = piece[0];
+    piece[3] = piece[0];
+}
 
 // T::T() {
 //     color = {128, 0, 128};

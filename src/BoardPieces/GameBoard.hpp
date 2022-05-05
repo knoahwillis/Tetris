@@ -1,10 +1,11 @@
 #pragma once
-// #include "./Color.hpp"
 #include <SDL2/SDL.h>
-// #include <array>
+#include <array>
 
 class GameBoard {
 public:
+    std::array<int, 10> ground;
+
     GameBoard();
     ~GameBoard();
 
