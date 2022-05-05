@@ -36,10 +36,10 @@ public:
     O();
 };
 
-// class T : public Piece {
-// public:
-//     T();
-// };
+class T : public Piece {
+public:
+    T();
+};
 
 // class S : public Piece {
 // public:

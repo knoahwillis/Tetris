@@ -21,7 +21,7 @@ void Piece::moveDown() {
         for (int j = 0; j < 4; j++) {
             piece[j][i].y += 1;
         }
-        if (piece[pieceOrientation][i].y > bottom) {
+        if (piece[pieceOrientation][i].y + 30 >= bottom) {
             bottom = piece[pieceOrientation][i].y + 30;
         }
     }
@@ -73,13 +73,13 @@ O::O() {
     piece[3] = piece[0];
 }
 
-// T::T() {
-//     color = {128, 0, 128};
-//     piece[0] = SDL_Rect{360, 114, 30, 30};
-//     piece[1] = SDL_Rect{390, 114, 30, 30};
-//     piece[2] = SDL_Rect{420, 114, 30, 30};
-//     piece[3] = SDL_Rect{390, 84, 30, 30};
-// }
+T::T() {
+    color = {128, 0, 128};
+    piece[0] = {SDL_Rect{360, 114, 30, 30}, SDL_Rect{390, 114, 30, 30}, SDL_Rect{420, 114, 30, 30}, SDL_Rect{390, 84, 30, 30}};
+    piece[1] = {SDL_Rect{360, 114, 30, 30}, SDL_Rect{390, 114, 30, 30}, SDL_Rect{420, 114, 30, 30}, SDL_Rect{390, 84, 30, 30}};
+    piece[2] = {SDL_Rect{360, 84, 30, 30}, SDL_Rect{390, 84, 30, 30}, SDL_Rect{420, 84, 30, 30}, SDL_Rect{390, 114, 30, 30}};
+    piece[3] = {SDL_Rect{360, 114, 30, 30}, SDL_Rect{390, 114, 30, 30}, SDL_Rect{420, 114, 30, 30}, SDL_Rect{390, 84, 30, 30}};
+}
 
 // S::S() {
 //     color = {0, 128, 0};
