@@ -41,22 +41,22 @@ public:
     T();
 };
 
-// class S : public Piece {
-// public:
-//     S();
-// };
+class S : public Piece {
+public:
+    S();
+};
 
-// class Z : public Piece {
-// public:
-//     Z();
-// };
+class Z : public Piece {
+public:
+    Z();
+};
 
-// class J : public Piece {
-// public:
-//     J();
-// };
+class J : public Piece {
+public:
+    J();
+};
 
-// class L : public Piece {
-// public:
-//     L();
-// };
+class L : public Piece {
+public:
+    L();
+};

@@ -35,18 +35,18 @@ void Piece::render(SDL_Renderer* rend) {
 }
 
 void Piece::rotateLeft() {
-    if (pieceOrientation == 0) {
-        pieceOrientation = 3;
-    } else {
-        pieceOrientation--;
-    }
-}
-
-void Piece::rotateRight() {
     if (pieceOrientation == 3) {
         pieceOrientation = 0;
     } else {
         pieceOrientation++;
+    }
+}
+
+void Piece::rotateRight() {
+    if (pieceOrientation == 0) {
+        pieceOrientation = 3;
+    } else {
+        pieceOrientation--;
     }
 }
 
@@ -61,8 +61,8 @@ I::I() {
     color = {0, 165, 165};
     piece[0] = {SDL_Rect{360, 114, 30, 30}, SDL_Rect{390, 114, 30, 30}, SDL_Rect{420, 114, 30, 30}, SDL_Rect{450, 114, 30, 30}};
     piece[1] = {SDL_Rect{390, 114, 30, 30}, SDL_Rect{390, 84, 30, 30}, SDL_Rect{390, 144, 30, 30}, SDL_Rect{390, 174, 30, 30}};
-    piece[2] = {SDL_Rect{360, 114, 30, 30}, SDL_Rect{390, 114, 30, 30}, SDL_Rect{420, 114, 30, 30}, SDL_Rect{450, 114, 30, 30}};
-    piece[3] = {SDL_Rect{390, 114, 30, 30}, SDL_Rect{390, 84, 30, 30}, SDL_Rect{390, 144, 30, 30}, SDL_Rect{390, 54, 30, 30}};
+    piece[2] = piece[0];
+    piece[3] = piece[1];
 }
 
 O::O() {
@@ -75,40 +75,40 @@ O::O() {
 
 T::T() {
     color = {128, 0, 128};
-    piece[0] = {SDL_Rect{360, 114, 30, 30}, SDL_Rect{390, 114, 30, 30}, SDL_Rect{420, 114, 30, 30}, SDL_Rect{390, 84, 30, 30}};
-    piece[1] = {SDL_Rect{360, 114, 30, 30}, SDL_Rect{390, 114, 30, 30}, SDL_Rect{420, 114, 30, 30}, SDL_Rect{390, 84, 30, 30}};
-    piece[2] = {SDL_Rect{360, 84, 30, 30}, SDL_Rect{390, 84, 30, 30}, SDL_Rect{420, 84, 30, 30}, SDL_Rect{390, 114, 30, 30}};
-    piece[3] = {SDL_Rect{360, 114, 30, 30}, SDL_Rect{390, 114, 30, 30}, SDL_Rect{420, 114, 30, 30}, SDL_Rect{390, 84, 30, 30}};
+    piece[0] = {SDL_Rect{360, 84, 30, 30}, SDL_Rect{390, 84, 30, 30}, SDL_Rect{420, 84, 30, 30}, SDL_Rect{390, 54, 30, 30}};
+    piece[1] = {SDL_Rect{420, 24, 30, 30}, SDL_Rect{420, 54, 30, 30}, SDL_Rect{420, 84, 30, 30}, SDL_Rect{390, 54, 30, 30}};
+    piece[2] = {SDL_Rect{360, 24, 30, 30}, SDL_Rect{390, 24, 30, 30}, SDL_Rect{420, 24, 30, 30}, SDL_Rect{390, 54, 30, 30}};
+    piece[3] = {SDL_Rect{360, 24, 30, 30}, SDL_Rect{360, 54, 30, 30}, SDL_Rect{360, 84, 30, 30}, SDL_Rect{390, 54, 30, 30}};
 }
 
-// S::S() {
-//     color = {0, 128, 0};
-//     piece[0] = SDL_Rect{360, 114, 30, 30};
-//     piece[1] = SDL_Rect{390, 114, 30, 30};
-//     piece[2] = SDL_Rect{420, 84, 30, 30};
-//     piece[3] = SDL_Rect{390, 84, 30, 30};
-// }
+S::S() {
+    color = {0, 128, 0};
+    piece[0] = {SDL_Rect{360, 114, 30, 30}, SDL_Rect{390, 114, 30, 30}, SDL_Rect{420, 84, 30, 30}, SDL_Rect{390, 84, 30, 30}};
+    piece[1] = {SDL_Rect{360, 114, 30, 30}, SDL_Rect{360, 84, 30, 30}, SDL_Rect{390, 114, 30, 30}, SDL_Rect{390, 144, 30, 30}};
+    piece[2] = {SDL_Rect{360, 114, 30, 30}, SDL_Rect{390, 114, 30, 30}, SDL_Rect{420, 84, 30, 30}, SDL_Rect{390, 84, 30, 30}};
+    piece[3] = {SDL_Rect{360, 114, 30, 30}, SDL_Rect{360, 84, 30, 30}, SDL_Rect{390, 114, 30, 30}, SDL_Rect{390, 144, 30, 30}};
+}
 
-// Z::Z() {
-//     color = {128, 0, 0};
-//     piece[0] = SDL_Rect{360, 84, 30, 30};
-//     piece[1] = SDL_Rect{390, 84, 30, 30};
-//     piece[2] = SDL_Rect{420, 114, 30, 30};
-//     piece[3] = SDL_Rect{390, 114, 30, 30};
-// }
+Z::Z() {
+    color = {128, 0, 0};
+    piece[0] = {SDL_Rect{360, 84, 30, 30}, SDL_Rect{390, 84, 30, 30}, SDL_Rect{420, 114, 30, 30}, SDL_Rect{390, 114, 30, 30}};
+    piece[1] = {SDL_Rect{390, 84, 30, 30}, SDL_Rect{390, 114, 30, 30}, SDL_Rect{420, 114, 30, 30}, SDL_Rect{420, 144, 30, 30}};
+    piece[2] = {SDL_Rect{360, 84, 30, 30}, SDL_Rect{390, 84, 30, 30}, SDL_Rect{420, 114, 30, 30}, SDL_Rect{390, 114, 30, 30}};
+    piece[3] = {SDL_Rect{390, 84, 30, 30}, SDL_Rect{390, 114, 30, 30}, SDL_Rect{420, 114, 30, 30}, SDL_Rect{420, 144, 30, 30}};
+}
 
-// J::J() {
-//     color = {0, 0, 128};
-//     piece[0] = SDL_Rect{360, 84, 30, 30};
-//     piece[1] = SDL_Rect{390, 114, 30, 30};
-//     piece[2] = SDL_Rect{420, 114, 30, 30};
-//     piece[3] = SDL_Rect{360, 114, 30, 30};
-// }
+J::J() {
+    color = {0, 0, 128};
+    piece[0] = {SDL_Rect{360, 84, 30, 30}, SDL_Rect{390, 114, 30, 30}, SDL_Rect{420, 114, 30, 30}, SDL_Rect{360, 114, 30, 30}};
+    piece[1] = {SDL_Rect{360, 144, 30, 30}, SDL_Rect{390, 84, 30, 30}, SDL_Rect{390, 114, 30, 30}, SDL_Rect{390, 144, 30, 30}};
+    piece[2] = {SDL_Rect{420, 144, 30, 30}, SDL_Rect{390, 114, 30, 30}, SDL_Rect{420, 114, 30, 30}, SDL_Rect{360, 114, 30, 30}};
+    piece[3] = {SDL_Rect{420, 84, 30, 30}, SDL_Rect{390, 84, 30, 30}, SDL_Rect{390, 114, 30, 30}, SDL_Rect{390, 144, 30, 30}};
+}
 
-// L::L() {
-//     color = {255, 165, 0};
-//     piece[0] = SDL_Rect{420, 84, 30, 30};
-//     piece[1] = SDL_Rect{390, 114, 30, 30};
-//     piece[2] = SDL_Rect{420, 114, 30, 30};
-//     piece[3] = SDL_Rect{360, 114, 30, 30};
-// }
+L::L() {
+    color = {255, 165, 0};
+    piece[0] = {SDL_Rect{420, 84, 30, 30}, SDL_Rect{390, 114, 30, 30}, SDL_Rect{420, 114, 30, 30}, SDL_Rect{360, 114, 30, 30}};
+    piece[1] = {SDL_Rect{360, 84, 30, 30}, SDL_Rect{390, 84, 30, 30}, SDL_Rect{390, 114, 30, 30}, SDL_Rect{390, 144, 30, 30}};
+    piece[2] = {SDL_Rect{360, 144, 30, 30}, SDL_Rect{390, 114, 30, 30}, SDL_Rect{420, 114, 30, 30}, SDL_Rect{360, 114, 30, 30}};
+    piece[3] = {SDL_Rect{420, 144, 30, 30}, SDL_Rect{390, 84, 30, 30}, SDL_Rect{390, 114, 30, 30}, SDL_Rect{390, 144, 30, 30}};
+}

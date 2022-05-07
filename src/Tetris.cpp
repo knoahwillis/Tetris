@@ -17,7 +17,30 @@ Tetris::Tetris(int h, int w) {
     next = new Next;
     hold = new Hold;
 
-    pieces.push_back(new I);
+    int test = rand() % 6;
+    switch (test) {
+    case 0:
+        pieces.push_back(new I);
+        break;
+    case 1:
+        pieces.push_back(new O);
+        break;
+    case 2:
+        pieces.push_back(new T);
+        break;
+    case 3:
+        pieces.push_back(new Z);
+        break;
+    case 4:
+        pieces.push_back(new S);
+        break;
+    case 5:
+        pieces.push_back(new J);
+        break;
+    case 6:
+        pieces.push_back(new L);
+        break;
+    }
 }
 
 Tetris::~Tetris() {
@@ -51,10 +74,10 @@ void Tetris::turn() {
                 pieces.back()->moveRight();
                 break;
             case SDL_SCANCODE_Q:
-                pieces.back()->rotateRight();
+                pieces.back()->rotateLeft();
                 break;
             case SDL_SCANCODE_E:
-                pieces.back()->rotateLeft();
+                pieces.back()->rotateRight();
                 break;
             case SDL_SCANCODE_SPACE:
                 pieces.back()->isDown = true;
