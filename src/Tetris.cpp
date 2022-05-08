@@ -11,12 +11,13 @@ Tetris::Tetris(int h, int w) {
     window = SDL_CreateWindow("Tetris", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, width, height, SDL_WINDOW_SHOWN);
     rend = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED);
 
-    game = new GameBoard;
+    game = new GameBoard(width / 2 - 130, 115);
     title = new Title;
     score = new Score;
     next = new Next;
     hold = new Hold;
 
+    // pieces.push_back(new Border);
     int test = rand() % 6;
     switch (test) {
     case 0:
@@ -81,20 +82,41 @@ void Tetris::turn() {
                 break;
             case SDL_SCANCODE_SPACE:
                 pieces.back()->isDown = true;
+                next->insertPiece(pieces);
                 break;
             }
         }
     }
-    for (int i = 0; i < 10; i++) {
-        if (pieces.back()->bottom >= game->ground[i]) {
-            pieces.back()->isDown = true;
-            next->insertPiece(pieces);
+    if (pieces.size() <= 1) {
+        for (int j = 0; j < 4; j++) {
+            if (pieces.back()->current()[j].y + 30 >= game->border.y + game->border.h) {
+                pieces.back()->isDown = true;
+            }
+        }
+    } else {
+        for (int i = 0; i < pieces.size(); i++) {
+            for (int j = 0; j < 4; j++) {
+                if (pieces.back()->current()[j].y + 30 >= game->border.y + game->border.h ||
+                    (i != pieces.size() - 1) && pieces.back()->current()[j].y + 30 >= pieces[i]->current()[j].y &&
+                        pieces.back()->current()[j].x >= pieces[i]->current()[j].x && pieces.back()->current()[j].x <= pieces[i]->current()[j].x + 30) {
+                    pieces.back()->isDown = true;
+                }
+            }
         }
     }
 
     if (!pieces.back()->isDown) {
         pieces.back()->moveDown();
+    } else {
+        next->insertPiece(pieces);
     }
+
+    // for (int i = 0; i < 10; i++) {
+    //     if (pieces.back()->bottom >= game->ground[i]) {
+    //         pieces.back()->isDown = true;
+    //         next->insertPiece(pieces);
+    //     }
+    // }
 }
 
 void Tetris::render() {
@@ -102,7 +124,7 @@ void Tetris::render() {
         SDL_SetRenderDrawColor(rend, 0, 0, 0, 255);
         SDL_RenderClear(rend);
 
-        game->render(rend, width / 2 - 130, 115);
+        game->render(rend);
         title->render(rend, width / 2 - 170, 25);
         score->render(rend, width / 2 - 300, 100);
         next->render(rend, width - 200, 100);

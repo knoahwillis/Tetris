@@ -19,10 +19,13 @@ void Piece::moveLeft() {
 void Piece::moveDown() {
     for (int i = 0; i < 4; i++) {
         for (int j = 0; j < 4; j++) {
-            piece[j][i].y += 1;
+            piece[j][i].y += 2;
         }
         if (piece[pieceOrientation][i].y + 30 >= bottom) {
             bottom = piece[pieceOrientation][i].y + 30;
+        }
+        if (piece[pieceOrientation][i].y <= top) {
+            top = piece[pieceOrientation][i].y;
         }
     }
 }
@@ -56,6 +59,17 @@ Piece::Piece() {
 }
 
 Piece::~Piece() {}
+
+std::array<int, 8> Piece::getY() {
+    std::array<int, 8> ret;
+    for (int i = 0; i < 4; i++) {
+        for (int j = 0; j < 4; j++) {
+            ret[i + j] = piece[i][j].y;
+        }
+    }
+}
+
+std::array<SDL_Rect, 4> Piece::current() { return piece[pieceOrientation]; }
 
 I::I() {
     color = {0, 165, 165};
@@ -111,4 +125,10 @@ L::L() {
     piece[1] = {SDL_Rect{360, 84, 30, 30}, SDL_Rect{390, 84, 30, 30}, SDL_Rect{390, 114, 30, 30}, SDL_Rect{390, 144, 30, 30}};
     piece[2] = {SDL_Rect{360, 144, 30, 30}, SDL_Rect{390, 114, 30, 30}, SDL_Rect{420, 114, 30, 30}, SDL_Rect{360, 114, 30, 30}};
     piece[3] = {SDL_Rect{420, 144, 30, 30}, SDL_Rect{390, 84, 30, 30}, SDL_Rect{390, 114, 30, 30}, SDL_Rect{390, 144, 30, 30}};
+}
+
+Border::Border() {
+    color = {0, 0, 0};
+    piece[0] = {SDL_Rect{0, 714, 1000, 1000}, SDL_Rect{0, 714, 1000, 1000}, SDL_Rect{0, 714, 1000, 1000}, SDL_Rect{0, 714, 1000, 1000}};
+    piece[1], piece[2], piece[3] = piece[0], piece[0], piece[0];
 }

@@ -6,11 +6,13 @@
 class Piece {
 protected:
     std::array<int, 3> color;
-    std::array<std::array<SDL_Rect, 4>, 4> piece;
     int pieceOrientation;
 
 public:
+    std::array<std::array<SDL_Rect, 4>, 4> piece;
+
     int bottom = 0;
+    int top = 0;
     bool isDown;
 
     Piece();
@@ -24,6 +26,10 @@ public:
     void rotateRight();
 
     void render(SDL_Renderer* rend);
+
+    std::array<int, 8> getY();
+
+    std::array<SDL_Rect, 4> current();
 };
 
 class I : public Piece {
@@ -59,4 +65,9 @@ public:
 class L : public Piece {
 public:
     L();
+};
+
+class Border : public Piece {
+public:
+    Border();
 };

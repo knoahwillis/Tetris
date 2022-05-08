@@ -1,13 +1,17 @@
 #pragma once
+#include "GamePieces.hpp"
 #include <SDL2/SDL.h>
 #include <array>
+#include <vector>
 
 class GameBoard {
 public:
     std::array<int, 10> ground;
 
-    GameBoard();
+    SDL_Rect border;
+
+    GameBoard(int xOffset, int yOffset);
     ~GameBoard();
 
-    void render(SDL_Renderer* rend, int xOffset, int yOffset);
+    void render(SDL_Renderer* rend);
 };
