@@ -22,7 +22,8 @@ class Tetris {
     Next* next;
     Hold* hold;
 
-    std::vector<Piece*> pieces;
+    std::vector<Piece*> piecesDown;
+    Piece* currentPiece;
 
 public:
     Tetris(int h, int w);

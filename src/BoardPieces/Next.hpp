@@ -38,5 +38,5 @@ public:
 
     void render(SDL_Renderer *rend, int xOffset, int yOffset);
 
-    void insertPiece(std::vector<Piece*> &currentPieces);
+    Piece* insertPiece();
 };

@@ -1,25 +1,26 @@
 #pragma once
 #include <SDL2/SDL.h>
 #include <array>
+#include "../Color.hpp"
 #include <vector>
 
 class Piece {
 protected:
-    std::array<int, 3> color;
     int pieceOrientation;
 
 public:
     std::array<std::array<SDL_Rect, 4>, 4> piece;
 
+    Color color;
+
     int bottom = 0;
     int top = 0;
-    bool isDown;
 
     Piece();
     ~Piece();
 
-    void moveRight();
-    void moveLeft();
+    void moveRight(std::vector<Piece*> pieces);
+    void moveLeft(std::vector<Piece*> pieces);
     void moveDown();
 
     void rotateLeft();
@@ -27,9 +28,9 @@ public:
 
     void render(SDL_Renderer* rend);
 
-    std::array<int, 8> getY();
-
     std::array<SDL_Rect, 4> current();
+
+    bool collision(std::array<std::array<Color, 10>, 20> piecesInPlace);
 };
 
 class I : public Piece {

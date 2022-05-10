@@ -21,25 +21,25 @@ Tetris::Tetris(int h, int w) {
     int test = rand() % 6;
     switch (test) {
     case 0:
-        pieces.push_back(new I);
+        currentPiece = new I;
         break;
     case 1:
-        pieces.push_back(new O);
+        currentPiece = new O;
         break;
     case 2:
-        pieces.push_back(new T);
+        currentPiece = new T;
         break;
     case 3:
-        pieces.push_back(new Z);
+        currentPiece = new Z;
         break;
     case 4:
-        pieces.push_back(new S);
+        currentPiece = new S;
         break;
     case 5:
-        pieces.push_back(new J);
+        currentPiece = new J;
         break;
     case 6:
-        pieces.push_back(new L);
+        currentPiece = new L;
         break;
     }
 }
@@ -50,6 +50,12 @@ Tetris::~Tetris() {
     delete score;
     delete next;
     delete hold;
+
+    delete currentPiece;
+
+    for (auto pieces : piecesDown) {
+        delete pieces;
+    }
 
     SDL_DestroyRenderer(rend);
     SDL_DestroyWindow(window);
@@ -69,56 +75,36 @@ void Tetris::turn() {
         case SDL_KEYDOWN:
             switch (e.key.keysym.scancode) {
             case SDL_SCANCODE_A:
-                pieces.back()->moveLeft();
+                currentPiece->moveLeft(piecesDown);
                 break;
             case SDL_SCANCODE_D:
-                pieces.back()->moveRight();
+                currentPiece->moveRight(piecesDown);
                 break;
             case SDL_SCANCODE_Q:
-                pieces.back()->rotateLeft();
+                currentPiece->rotateLeft();
                 break;
             case SDL_SCANCODE_E:
-                pieces.back()->rotateRight();
+                currentPiece->rotateRight();
                 break;
             case SDL_SCANCODE_SPACE:
-                pieces.back()->isDown = true;
-                next->insertPiece(pieces);
                 break;
             }
         }
     }
-    if (pieces.size() <= 1) {
-        for (int j = 0; j < 4; j++) {
-            if (pieces.back()->current()[j].y + 30 >= game->border.y + game->border.h) {
-                pieces.back()->isDown = true;
-            }
-        }
-    } else {
-        for (int i = 0; i < pieces.size(); i++) {
-            for (int j = 0; j < 4; j++) {
-                if (pieces.back()->current()[j].y + 30 >= game->border.y + game->border.h ||
-                    (i != pieces.size() - 1) && pieces.back()->current()[j].y + 30 >= pieces[i]->current()[j].y &&
-                        pieces.back()->current()[j].x >= pieces[i]->current()[j].x && pieces.back()->current()[j].x <= pieces[i]->current()[j].x + 30) {
-                    pieces.back()->isDown = true;
-                }
-            }
-        }
+
+    if (currentPiece->current()[0].y + 30 >= 715 || currentPiece->current()[1].y + 30 >= 715 ||
+        currentPiece->current()[2].y + 30 >= 715 || currentPiece->current()[3].y + 30 >= 715) {
+        game->putInPlace(currentPiece);
+        currentPiece = next->insertPiece();
+        game->printBoard();
+    } else if (currentPiece->collision(game->piecesInPlace)) {
+        game->putInPlace(currentPiece);
+        currentPiece = next->insertPiece();
     }
 
-    if (!pieces.back()->isDown) {
-        pieces.back()->moveDown();
-    } else {
-        next->insertPiece(pieces);
-    }
 
-    // for (int i = 0; i < 10; i++) {
-    //     if (pieces.back()->bottom >= game->ground[i]) {
-    //         pieces.back()->isDown = true;
-    //         next->insertPiece(pieces);
-    //     }
-    // }
+    currentPiece->moveDown();
 }
-
 void Tetris::render() {
     while (running) {
         SDL_SetRenderDrawColor(rend, 0, 0, 0, 255);
@@ -129,8 +115,9 @@ void Tetris::render() {
         score->render(rend, width / 2 - 300, 100);
         next->render(rend, width - 200, 100);
         hold->render(rend, width / 2 - 290, 250);
-        for (int i = 0; i < pieces.size(); i++) {
-            pieces[i]->render(rend);
+        currentPiece->render(rend);
+        for (int i = 0; i < piecesDown.size(); i++) {
+            piecesDown[i]->render(rend);
         }
 
         this->turn();

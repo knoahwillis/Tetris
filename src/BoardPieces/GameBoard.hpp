@@ -3,10 +3,12 @@
 #include <SDL2/SDL.h>
 #include <array>
 #include <vector>
+#include "../Color.hpp"
 
 class GameBoard {
+    SDL_Rect temp = {0, 0, 0, 0};
 public:
-    std::array<int, 10> ground;
+    std::array<std::array<Color, 10>, 20> piecesInPlace;
 
     SDL_Rect border;
 
@@ -14,4 +16,8 @@ public:
     ~GameBoard();
 
     void render(SDL_Renderer* rend);
+
+    void putInPlace(Piece* piece);
+
+    void printBoard();
 };
