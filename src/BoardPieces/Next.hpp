@@ -1,7 +1,7 @@
 #pragma once
-#include <vector>
-#include <SDL2/SDL.h>
 #include "GamePieces.hpp"
+#include <SDL2/SDL.h>
+#include <vector>
 
 class Next {
     // clang-format off
@@ -30,13 +30,49 @@ class Next {
          0, 1, 1, 0,
          0, 1, 1, 0}
     };
+
+    const int pieceI[8] = {
+        0, 0, 0, 0,
+        1, 1, 1, 1
+    };
+
+    const int pieceO[8] = {
+        0, 1, 1, 0,
+        0, 1, 1, 0
+    };
+
+    const int pieceS[8] = {
+        0, 0, 1, 1,
+        0, 1, 1, 0
+    };
+
+    const int pieceZ[8] = {
+        0, 1, 1, 0,
+        0, 0, 1, 1
+    };
+
+    const int pieceL[8] = {
+        0, 0, 0, 1,
+        0, 1, 1, 1
+    };
+
+    const int pieceJ[8] = {
+        0, 1, 0, 0,
+        0, 1, 1, 1
+    };
+
+    const int pieceT[8] = {
+        0, 0, 1, 0,
+        0, 1, 1, 1
+    };
     // clang-format on
-    std::vector<Piece*> nextPieces;
+    std::vector<Piece*>nextPieces;
+
 public:
     Next();
     ~Next();
 
-    void render(SDL_Renderer *rend, int xOffset, int yOffset);
+    void render(SDL_Renderer* rend, int xOffset, int yOffset);
 
     Piece* insertPiece();
 };
