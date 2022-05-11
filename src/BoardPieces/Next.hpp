@@ -47,13 +47,13 @@ class Next {
     };
 
     const int pieceZ[8] = {
-        0, 1, 1, 0,
-        0, 0, 1, 1
+        1, 1, 0, 0,
+        0, 1, 1, 0
     };
 
     const int pieceL[8] = {
-        0, 0, 0, 1,
-        0, 1, 1, 1
+        0, 0, 1, 0,
+        1, 1, 1, 0
     };
 
     const int pieceJ[8] = {
@@ -62,11 +62,13 @@ class Next {
     };
 
     const int pieceT[8] = {
-        0, 0, 1, 0,
-        0, 1, 1, 1
+        0, 1, 0, 0,
+        1, 1, 1, 0
     };
     // clang-format on
-    std::vector<Piece*>nextPieces;
+    std::vector<Piece*> nextPieces;
+
+    SDL_Rect border = {595, 150, 130, 350};
 
 public:
     Next();

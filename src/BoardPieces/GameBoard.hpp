@@ -6,7 +6,6 @@
 #include <vector>
 
 class GameBoard {
-    SDL_Rect temp = {0, 0, 0, 0};
 
 public:
     std::array<std::array<Color, 12>, 20> piecesInPlace;

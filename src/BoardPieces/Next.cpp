@@ -41,6 +41,7 @@ Next::~Next() {
 
 void Next::render(SDL_Renderer* rend, int xOffset, int yOffset) {
     SDL_SetRenderDrawColor(rend, 255, 255, 255, 255);
+    SDL_RenderDrawRect(rend, &border);
 
     for (int i = 0; i < 4; i++) {
         for (int y = 0; y < 5; y++) {
@@ -53,6 +54,7 @@ void Next::render(SDL_Renderer* rend, int xOffset, int yOffset) {
         }
         xOffset += 30;
     }
+
 
     yOffset += 60;
     for (int i = 0; i < 3; i++) {
