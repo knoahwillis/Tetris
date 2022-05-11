@@ -1,38 +1,69 @@
 #include "GamePieces.hpp"
 #include <iostream>
 
-void Piece::moveRight(std::vector<Piece*> pieces) {
-    // if (!this->collision(pieces)) {
+void Piece::moveRight() {
     for (int i = 0; i < 4; i++) {
         for (int j = 0; j < 4; j++) {
             piece[j][i].x += 30;
         }
     }
-    // }
 }
 
-void Piece::moveLeft(std::vector<Piece*> pieces) {
-    // if (!this->collision(pieces)) {
+Piece Piece::movedRight() {
+    Piece ret = *this;
+    ret.moveRight();
+    return ret;
+}
+
+void Piece::moveLeft() {
     for (int i = 0; i < 4; i++) {
         for (int j = 0; j < 4; j++) {
             piece[j][i].x -= 30;
-            // }
         }
     }
+}
+
+Piece Piece::movedLeft() {
+    Piece ret = *this;
+    ret.moveLeft();
+    return ret;
 }
 
 void Piece::moveDown() {
     for (int i = 0; i < 4; i++) {
-        for (int j = 0; j < 4; j++) {
-            piece[j][i].y += 1;
-        }
-        if (piece[pieceOrientation][i].y + 30 >= bottom) {
-            bottom = piece[pieceOrientation][i].y + 30;
-        }
-        if (piece[pieceOrientation][i].y <= top) {
-            top = piece[pieceOrientation][i].y;
-        }
+        piece[i][0].y += 1;
+        piece[i][1].y += 1;
+        piece[i][2].y += 1;
+        piece[i][3].y += 1;
     }
+}
+
+void Piece::rotateRight() {
+    if (pieceOrientation == 0) {
+        pieceOrientation = 3;
+    } else {
+        pieceOrientation--;
+    }
+}
+
+void Piece::rotateLeft() {
+    if (pieceOrientation == 3) {
+        pieceOrientation = 0;
+    } else {
+        pieceOrientation++;
+    }
+}
+
+Piece Piece::rotatedRight() {
+    Piece ret = *this;
+    ret.rotateRight();
+    return ret;
+}
+
+Piece Piece::rotatedLeft() {
+    Piece ret = *this;
+    ret.rotateLeft();
+    return ret;
 }
 
 void Piece::render(SDL_Renderer* rend) {
@@ -66,32 +97,19 @@ void Piece::render(SDL_Renderer* rend) {
         break;
     }
     for (int i = 0; i < 4; i++) {
-        SDL_RenderFillRect(rend, &piece[pieceOrientation][i]);
+        if (piece[pieceOrientation][i].y >= 115) {
+            SDL_RenderFillRect(rend, &piece[pieceOrientation][i]);
+        }
     }
 }
 
-void Piece::rotateLeft() {
-    if (pieceOrientation == 3) {
-        pieceOrientation = 0;
-    } else {
-        pieceOrientation++;
-    }
-}
 
-void Piece::rotateRight() {
-    if (pieceOrientation == 0) {
-        pieceOrientation = 3;
-    } else {
-        pieceOrientation--;
-    }
-}
-
-bool Piece::collision(std::array<std::array<Color, 10>, 20> piecesInPlace) {
+bool Piece::collision(std::array<std::array<Color, 12>, 20> piecesInPlace) {
     int j, k;
     for (int i = 0; i < 4; i++) {
         j = ((piece[pieceOrientation][i].y + 30) / 30) - (115 / 30);
         k = ((piece[pieceOrientation][i].x) / 30) - (270 / 30);
-        if (piecesInPlace[j][k] != NONE) {
+        if (piecesInPlace[j][k] != NONE && piecesInPlace[i][j] != BORDER) {
             return true;
         }
     }
@@ -159,10 +177,4 @@ L::L() {
     piece[1] = {SDL_Rect{360, 84, 30, 30}, SDL_Rect{390, 84, 30, 30}, SDL_Rect{390, 114, 30, 30}, SDL_Rect{390, 144, 30, 30}};
     piece[2] = {SDL_Rect{360, 144, 30, 30}, SDL_Rect{390, 114, 30, 30}, SDL_Rect{420, 114, 30, 30}, SDL_Rect{360, 114, 30, 30}};
     piece[3] = {SDL_Rect{420, 144, 30, 30}, SDL_Rect{390, 84, 30, 30}, SDL_Rect{390, 114, 30, 30}, SDL_Rect{390, 144, 30, 30}};
-}
-
-Border::Border() {
-    color = WHITE;
-    piece[0] = {SDL_Rect{0, 714, 1000, 1000}, SDL_Rect{0, 714, 1000, 1000}, SDL_Rect{0, 714, 1000, 1000}, SDL_Rect{0, 714, 1000, 1000}};
-    piece[1], piece[2], piece[3] = piece[0], piece[0], piece[0];
 }

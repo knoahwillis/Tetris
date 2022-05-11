@@ -1,11 +1,15 @@
 #include "GameBoard.hpp"
 #include <iostream>
 
-GameBoard::GameBoard(int xOffset, int yOffset) {
+GameBoard::GameBoard() {
     border = {270, 115, 300, 600};
     for (int i = 0; i < piecesInPlace.size(); i++) {
         for (int j = 0; j < piecesInPlace[i].size(); j++) {
-            piecesInPlace[i][j] = NONE;
+            if (j == 0 || j == 11) {
+                piecesInPlace[i][j] = BORDER;
+            } else {
+                piecesInPlace[i][j] = NONE;
+            }
         }
     }
 }
@@ -52,7 +56,7 @@ void GameBoard::render(SDL_Renderer* rend) {
     }
 
     SDL_SetRenderDrawColor(rend, 255, 255, 255, 255);
-    border = {270, 115, 300, 600};
+
     SDL_RenderDrawRect(rend, &border);
 }
 
@@ -64,9 +68,9 @@ void GameBoard::putInPlace(Piece* piece) {
 
 void GameBoard::checkIfLine() {
     for (int i = 19; i >= 0; i--) {
-        if (piecesInPlace[i][0] != NONE && piecesInPlace[i][2] != NONE && piecesInPlace[i][3] != NONE && piecesInPlace[i][4] != NONE &&
+        if (piecesInPlace[i][1] != NONE && piecesInPlace[i][2] != NONE && piecesInPlace[i][3] != NONE && piecesInPlace[i][4] != NONE &&
             piecesInPlace[i][5] != NONE && piecesInPlace[i][6] != NONE && piecesInPlace[i][7] != NONE && piecesInPlace[i][8] != NONE &&
-            piecesInPlace[i][9] != NONE) {
+            piecesInPlace[i][9] != NONE && piecesInPlace[i][10] != NONE) {
             for (int j = i; j > 0; j--) {
                 piecesInPlace[j] = piecesInPlace[j - 1];
             }
@@ -77,9 +81,18 @@ void GameBoard::checkIfLine() {
 
 void GameBoard::printBoard() {
     for (int i = 0; i < 20; i++) {
-        for (int j = 0; j < 10; j++) {
+        for (int j = 0; j < 12; j++) {
             std::cout << piecesInPlace[i][j] << " ";
         }
         std::cout << "\n";
     }
+}
+
+bool GameBoard::checkIfLost() {
+    for (int i = 1; i < 10; i++) {
+        if (piecesInPlace[0][i] != NONE && piecesInPlace[0][i] != BORDER) {
+            return true;
+        }
+    }
+    return false;
 }

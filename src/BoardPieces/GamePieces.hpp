@@ -1,7 +1,7 @@
 #pragma once
+#include "../Color.hpp"
 #include <SDL2/SDL.h>
 #include <array>
-#include "../Color.hpp"
 #include <vector>
 
 class Piece {
@@ -13,24 +13,26 @@ public:
 
     Color color;
 
-    int bottom = 0;
-    int top = 0;
-
     Piece();
     ~Piece();
 
-    void moveRight(std::vector<Piece*> pieces);
-    void moveLeft(std::vector<Piece*> pieces);
+    void moveRight();
+    void moveLeft();
+    Piece movedRight();
+    Piece movedLeft();
+
     void moveDown();
 
-    void rotateLeft();
     void rotateRight();
+    void rotateLeft();
+    Piece rotatedRight();
+    Piece rotatedLeft();
 
     void render(SDL_Renderer* rend);
 
     std::array<SDL_Rect, 4> current();
 
-    bool collision(std::array<std::array<Color, 10>, 20> piecesInPlace);
+    bool collision(std::array<std::array<Color, 12>, 20> piecesInPlace);
 };
 
 class I : public Piece {
@@ -66,9 +68,4 @@ public:
 class L : public Piece {
 public:
     L();
-};
-
-class Border : public Piece {
-public:
-    Border();
 };

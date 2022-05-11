@@ -11,13 +11,13 @@ Tetris::Tetris(int h, int w) {
     window = SDL_CreateWindow("Tetris", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, width, height, SDL_WINDOW_SHOWN);
     rend = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED);
 
-    game = new GameBoard(width / 2 - 130, 115);
+    game = new GameBoard;
     title = new Title;
     score = new Score;
     next = new Next;
     hold = new Hold;
 
-    // pieces.push_back(new Border);
+
     int test = rand() % 7;
     switch (test) {
     case 0:
@@ -53,9 +53,6 @@ Tetris::~Tetris() {
 
     delete currentPiece;
 
-    for (auto pieces : piecesDown) {
-        delete pieces;
-    }
 
     SDL_DestroyRenderer(rend);
     SDL_DestroyWindow(window);
@@ -76,21 +73,35 @@ void Tetris::turn() {
             switch (e.key.keysym.scancode) {
             case SDL_SCANCODE_A:
                 if (!(currentPiece->current()[0].x <= 270 || currentPiece->current()[1].x <= 270 || currentPiece->current()[2].x <= 270 ||
-                      currentPiece->current()[3].x <= 270)) {
-                    currentPiece->moveLeft(piecesDown);
+                      currentPiece->current()[3].x <= 270) &&
+                    !currentPiece->movedLeft().collision(game->piecesInPlace)) {
+                    currentPiece->moveLeft();
                 }
                 break;
             case SDL_SCANCODE_D:
                 if (!(currentPiece->current()[0].x >= 540 || currentPiece->current()[1].x >= 540 || currentPiece->current()[2].x >= 540 ||
-                      currentPiece->current()[3].x >= 540)) {
-                    currentPiece->moveRight(piecesDown);
+                      currentPiece->current()[3].x >= 540) &&
+                    !currentPiece->movedRight().collision(game->piecesInPlace)) {
+                    currentPiece->moveRight();
                 }
                 break;
             case SDL_SCANCODE_Q:
-                currentPiece->rotateLeft();
+                if ((!(currentPiece->rotatedLeft().current()[0].x >= 540 || currentPiece->rotatedLeft().current()[1].x >= 540 ||
+                       currentPiece->rotatedLeft().current()[2].x >= 540 || currentPiece->rotatedLeft().current()[3].x >= 540) ||
+                     !(currentPiece->rotatedLeft().current()[0].x <= 270 || currentPiece->rotatedLeft().current()[1].x <= 270 ||
+                       currentPiece->rotatedLeft().current()[2].x <= 270 || currentPiece->rotatedLeft().current()[3].x <= 270)) &&
+                    !currentPiece->rotatedLeft().collision(game->piecesInPlace)) {
+                    currentPiece->rotateLeft();
+                }
                 break;
             case SDL_SCANCODE_E:
-                currentPiece->rotateRight();
+                if ((!(currentPiece->rotatedRight().current()[0].x >= 540 || currentPiece->rotatedRight().current()[1].x >= 540 ||
+                       currentPiece->rotatedRight().current()[2].x >= 540 || currentPiece->rotatedRight().current()[3].x >= 540) ||
+                     !(currentPiece->rotatedRight().current()[0].x <= 270 || currentPiece->rotatedRight().current()[1].x <= 270 ||
+                       currentPiece->rotatedRight().current()[2].x <= 270 || currentPiece->rotatedRight().current()[3].x <= 270)) &&
+                    !currentPiece->rotatedRight().collision(game->piecesInPlace)) {
+                    currentPiece->rotateRight();
+                }
                 break;
             case SDL_SCANCODE_SPACE:
                 break;
@@ -108,8 +119,16 @@ void Tetris::turn() {
     } else if (currentPiece->collision(game->piecesInPlace)) {
         game->putInPlace(currentPiece);
         currentPiece = next->insertPiece();
-        game->checkIfLine();
+    } else {
+        currentPiece->moveDown();
     }
+
+    game->checkIfLine();
+    game->printBoard();
+    std::cout << "\n";
+    // if (game->checkIfLost()) {
+    //     running = false;
+    // }
 }
 
 void Tetris::render() {
@@ -123,12 +142,8 @@ void Tetris::render() {
         next->render(rend, width - 200, 100);
         hold->render(rend, width / 2 - 290, 250);
         currentPiece->render(rend);
-        for (int i = 0; i < piecesDown.size(); i++) {
-            piecesDown[i]->render(rend);
-        }
 
         this->turn();
-        currentPiece->moveDown();
 
         SDL_RenderPresent(rend);
     }

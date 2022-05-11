@@ -1,11 +1,11 @@
 #pragma once
+#include "BoardPieces/GameBoard.hpp"
+#include "BoardPieces/GamePieces.hpp"
+#include "BoardPieces/Hold.hpp"
+#include "BoardPieces/Next.hpp"
 #include "BoardPieces/Score.hpp"
 #include "BoardPieces/Title.hpp"
-#include "BoardPieces/Next.hpp"
-#include "BoardPieces/Hold.hpp"
-#include "BoardPieces/GameBoard.hpp"
 #include <vector>
-#include "BoardPieces/GamePieces.hpp"
 
 
 class Tetris {
@@ -22,7 +22,6 @@ class Tetris {
     Next* next;
     Hold* hold;
 
-    std::vector<Piece*> piecesDown;
     Piece* currentPiece;
 
 public:
