@@ -62,9 +62,22 @@ void GameBoard::putInPlace(Piece* piece) {
     }
 }
 
+void GameBoard::checkIfLine() {
+    for (int i = 19; i >= 0; i--) {
+        if (piecesInPlace[i][0] != NONE && piecesInPlace[i][2] != NONE && piecesInPlace[i][3] != NONE && piecesInPlace[i][4] != NONE &&
+            piecesInPlace[i][5] != NONE && piecesInPlace[i][6] != NONE && piecesInPlace[i][7] != NONE && piecesInPlace[i][8] != NONE &&
+            piecesInPlace[i][9] != NONE) {
+            for (int j = i; j > 0; j--) {
+                piecesInPlace[j] = piecesInPlace[j - 1];
+            }
+            return;
+        }
+    }
+}
+
 void GameBoard::printBoard() {
-    for(int i = 0; i < 20; i++) {
-        for(int j = 0; j < 10; j++) {
+    for (int i = 0; i < 20; i++) {
+        for (int j = 0; j < 10; j++) {
             std::cout << piecesInPlace[i][j] << " ";
         }
         std::cout << "\n";

@@ -18,7 +18,7 @@ Tetris::Tetris(int h, int w) {
     hold = new Hold;
 
     // pieces.push_back(new Border);
-    int test = rand() % 6;
+    int test = rand() % 7;
     switch (test) {
     case 0:
         currentPiece = new I;
@@ -102,11 +102,10 @@ void Tetris::turn() {
     } else if (currentPiece->collision(game->piecesInPlace)) {
         game->putInPlace(currentPiece);
         currentPiece = next->insertPiece();
-        game->printBoard();
-        std::cout << "\n";
     } else {
         currentPiece->moveDown();
     }
+    game->checkIfLine();
 }
 
 void Tetris::render() {

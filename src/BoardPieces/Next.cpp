@@ -5,7 +5,7 @@
 
 Next::Next() {
     for (int i = 0; i < 7; i++) {
-        int pieceType = rand() % 6;
+        int pieceType = rand() % 7;
         
         switch (pieceType) {
         case 0:

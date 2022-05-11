@@ -20,4 +20,6 @@ public:
     void putInPlace(Piece* piece);
 
     void printBoard();
+
+    void checkIfLine();
 };
