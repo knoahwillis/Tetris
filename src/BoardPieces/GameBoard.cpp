@@ -49,7 +49,7 @@ void GameBoard::render(SDL_Renderer* rend) {
                 SDL_SetRenderDrawColor(rend, 0, 0, 0, 255);
                 break;
             }
-            SDL_Rect temp = {j * 30 + 270, i * 30 + 115, 30, 30};
+            SDL_Rect temp = {j * 30 + 240, i * 30 + 115, 30, 30};
             SDL_RenderFillRect(rend, &temp);
             SDL_SetRenderDrawColor(rend, 0, 0, 0, 255);
         }
@@ -62,7 +62,7 @@ void GameBoard::render(SDL_Renderer* rend) {
 
 void GameBoard::putInPlace(Piece* piece) {
     for (int i = 0; i < 4; i++) {
-        piecesInPlace[((piece->current()[i].y) / 30) - (115 / 30)][(piece->current()[i].x / 30) - (270 / 30)] = piece->color;
+        piecesInPlace[((piece->current()[i].y) / 30) - (115 / 30)][(piece->current()[i].x / 30) - (240 / 30)] = piece->color;
     }
 }
 

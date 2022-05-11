@@ -72,34 +72,22 @@ void Tetris::turn() {
         case SDL_KEYDOWN:
             switch (e.key.keysym.scancode) {
             case SDL_SCANCODE_A:
-                if (!(currentPiece->current()[0].x <= 270 || currentPiece->current()[1].x <= 270 || currentPiece->current()[2].x <= 270 ||
-                      currentPiece->current()[3].x <= 270) &&
-                    !currentPiece->movedLeft().collision(game->piecesInPlace)) {
+                if (!currentPiece->movedLeft().collision(game->piecesInPlace)) {
                     currentPiece->moveLeft();
                 }
                 break;
             case SDL_SCANCODE_D:
-                if (!(currentPiece->current()[0].x >= 540 || currentPiece->current()[1].x >= 540 || currentPiece->current()[2].x >= 540 ||
-                      currentPiece->current()[3].x >= 540) &&
-                    !currentPiece->movedRight().collision(game->piecesInPlace)) {
+                if (!currentPiece->movedRight().collision(game->piecesInPlace)) {
                     currentPiece->moveRight();
                 }
                 break;
             case SDL_SCANCODE_Q:
-                if ((!(currentPiece->rotatedLeft().current()[0].x >= 540 || currentPiece->rotatedLeft().current()[1].x >= 540 ||
-                       currentPiece->rotatedLeft().current()[2].x >= 540 || currentPiece->rotatedLeft().current()[3].x >= 540) ||
-                     !(currentPiece->rotatedLeft().current()[0].x <= 270 || currentPiece->rotatedLeft().current()[1].x <= 270 ||
-                       currentPiece->rotatedLeft().current()[2].x <= 270 || currentPiece->rotatedLeft().current()[3].x <= 270)) &&
-                    !currentPiece->rotatedLeft().collision(game->piecesInPlace)) {
+                if (!currentPiece->rotatedLeft().collision(game->piecesInPlace)) {
                     currentPiece->rotateLeft();
                 }
                 break;
             case SDL_SCANCODE_E:
-                if ((!(currentPiece->rotatedRight().current()[0].x >= 540 || currentPiece->rotatedRight().current()[1].x >= 540 ||
-                       currentPiece->rotatedRight().current()[2].x >= 540 || currentPiece->rotatedRight().current()[3].x >= 540) ||
-                     !(currentPiece->rotatedRight().current()[0].x <= 270 || currentPiece->rotatedRight().current()[1].x <= 270 ||
-                       currentPiece->rotatedRight().current()[2].x <= 270 || currentPiece->rotatedRight().current()[3].x <= 270)) &&
-                    !currentPiece->rotatedRight().collision(game->piecesInPlace)) {
+                if (!currentPiece->rotatedRight().collision(game->piecesInPlace)) {
                     currentPiece->rotateRight();
                 }
                 break;
@@ -124,11 +112,9 @@ void Tetris::turn() {
     }
 
     game->checkIfLine();
-    game->printBoard();
-    std::cout << "\n";
-    // if (game->checkIfLost()) {
-    //     running = false;
-    // }
+    if (game->checkIfLost()) {
+        running = false;
+    }
 }
 
 void Tetris::render() {

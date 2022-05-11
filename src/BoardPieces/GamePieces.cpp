@@ -104,12 +104,13 @@ void Piece::render(SDL_Renderer* rend) {
 }
 
 
+
 bool Piece::collision(std::array<std::array<Color, 12>, 20> piecesInPlace) {
     int j, k;
     for (int i = 0; i < 4; i++) {
         j = ((piece[pieceOrientation][i].y + 30) / 30) - (115 / 30);
-        k = ((piece[pieceOrientation][i].x) / 30) - (270 / 30);
-        if (piecesInPlace[j][k] != NONE && piecesInPlace[i][j] != BORDER) {
+        k = ((piece[pieceOrientation][i].x) / 30) - (240 / 30);
+        if (piecesInPlace[j][k] != NONE) {
             return true;
         }
     }
