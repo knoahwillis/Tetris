@@ -75,10 +75,16 @@ void Tetris::turn() {
         case SDL_KEYDOWN:
             switch (e.key.keysym.scancode) {
             case SDL_SCANCODE_A:
-                currentPiece->moveLeft(piecesDown);
+                if (!(currentPiece->current()[0].x <= 270 || currentPiece->current()[1].x <= 270 || currentPiece->current()[2].x <= 270 ||
+                      currentPiece->current()[3].x <= 270)) {
+                    currentPiece->moveLeft(piecesDown);
+                }
                 break;
             case SDL_SCANCODE_D:
-                currentPiece->moveRight(piecesDown);
+                if (!(currentPiece->current()[0].x >= 540 || currentPiece->current()[1].x >= 540 || currentPiece->current()[2].x >= 540 ||
+                      currentPiece->current()[3].x >= 540)) {
+                    currentPiece->moveRight(piecesDown);
+                }
                 break;
             case SDL_SCANCODE_Q:
                 currentPiece->rotateLeft();
@@ -102,10 +108,8 @@ void Tetris::turn() {
     } else if (currentPiece->collision(game->piecesInPlace)) {
         game->putInPlace(currentPiece);
         currentPiece = next->insertPiece();
-    } else {
-        currentPiece->moveDown();
+        game->checkIfLine();
     }
-    game->checkIfLine();
 }
 
 void Tetris::render() {
@@ -124,6 +128,7 @@ void Tetris::render() {
         }
 
         this->turn();
+        currentPiece->moveDown();
 
         SDL_RenderPresent(rend);
     }

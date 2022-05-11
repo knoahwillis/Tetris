@@ -24,7 +24,7 @@ void Piece::moveLeft(std::vector<Piece*> pieces) {
 void Piece::moveDown() {
     for (int i = 0; i < 4; i++) {
         for (int j = 0; j < 4; j++) {
-            piece[j][i].y += 2;
+            piece[j][i].y += 1;
         }
         if (piece[pieceOrientation][i].y + 30 >= bottom) {
             bottom = piece[pieceOrientation][i].y + 30;
@@ -140,9 +140,9 @@ S::S() {
 Z::Z() {
     color = RED;
     piece[0] = {SDL_Rect{360, 84, 30, 30}, SDL_Rect{390, 84, 30, 30}, SDL_Rect{420, 114, 30, 30}, SDL_Rect{390, 114, 30, 30}};
-    piece[1] = {SDL_Rect{390, 84, 30, 30}, SDL_Rect{390, 114, 30, 30}, SDL_Rect{420, 114, 30, 30}, SDL_Rect{420, 144, 30, 30}};
+    piece[1] = {SDL_Rect{450, 84, 30, 30}, SDL_Rect{450, 114, 30, 30}, SDL_Rect{420, 114, 30, 30}, SDL_Rect{420, 144, 30, 30}};
     piece[2] = {SDL_Rect{360, 84, 30, 30}, SDL_Rect{390, 84, 30, 30}, SDL_Rect{420, 114, 30, 30}, SDL_Rect{390, 114, 30, 30}};
-    piece[3] = {SDL_Rect{390, 84, 30, 30}, SDL_Rect{390, 114, 30, 30}, SDL_Rect{420, 114, 30, 30}, SDL_Rect{420, 144, 30, 30}};
+    piece[3] = {SDL_Rect{450, 84, 30, 30}, SDL_Rect{450, 114, 30, 30}, SDL_Rect{420, 114, 30, 30}, SDL_Rect{420, 144, 30, 30}};
 }
 
 J::J() {
