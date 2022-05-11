@@ -58,7 +58,7 @@ void GameBoard::render(SDL_Renderer* rend) {
 
 void GameBoard::putInPlace(Piece* piece) {
     for (int i = 0; i < 4; i++) {
-        piecesInPlace[(piece->current()[i].y - 115) / 30][(piece->current()[i].x / 30) - (270 / 30)] = piece->color;
+        piecesInPlace[((piece->current()[i].y) / 30) - (115 / 30)][(piece->current()[i].x / 30) - (270 / 30)] = piece->color;
     }
 }
 

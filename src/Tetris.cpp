@@ -88,23 +88,27 @@ void Tetris::turn() {
                 break;
             case SDL_SCANCODE_SPACE:
                 break;
+            case SDL_SCANCODE_ESCAPE:
+                running = false;
+                break;
             }
         }
     }
 
-    if (currentPiece->current()[0].y + 30 >= 715 || currentPiece->current()[1].y + 30 >= 715 ||
-        currentPiece->current()[2].y + 30 >= 715 || currentPiece->current()[3].y + 30 >= 715) {
+    if (currentPiece->current()[0].y + 30 >= 715 || currentPiece->current()[1].y + 30 >= 715 || currentPiece->current()[2].y + 30 >= 715 ||
+        currentPiece->current()[3].y + 30 >= 715) {
         game->putInPlace(currentPiece);
         currentPiece = next->insertPiece();
-        game->printBoard();
     } else if (currentPiece->collision(game->piecesInPlace)) {
         game->putInPlace(currentPiece);
         currentPiece = next->insertPiece();
+        game->printBoard();
+        std::cout << "\n";
+    } else {
+        currentPiece->moveDown();
     }
-
-
-    currentPiece->moveDown();
 }
+
 void Tetris::render() {
     while (running) {
         SDL_SetRenderDrawColor(rend, 0, 0, 0, 255);
