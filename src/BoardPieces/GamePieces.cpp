@@ -142,10 +142,10 @@ O::O() {
 
 T::T() {
     color = PURPLE;
-    piece[0] = {SDL_Rect{360, 84, 30, 30}, SDL_Rect{390, 84, 30, 30}, SDL_Rect{420, 84, 30, 30}, SDL_Rect{390, 54, 30, 30}};
-    piece[1] = {SDL_Rect{420, 24, 30, 30}, SDL_Rect{420, 54, 30, 30}, SDL_Rect{420, 84, 30, 30}, SDL_Rect{390, 54, 30, 30}};
-    piece[2] = {SDL_Rect{360, 24, 30, 30}, SDL_Rect{390, 24, 30, 30}, SDL_Rect{420, 24, 30, 30}, SDL_Rect{390, 54, 30, 30}};
-    piece[3] = {SDL_Rect{360, 24, 30, 30}, SDL_Rect{360, 54, 30, 30}, SDL_Rect{360, 84, 30, 30}, SDL_Rect{390, 54, 30, 30}};
+    piece[0] = {SDL_Rect{360, 114, 30, 30}, SDL_Rect{390, 114, 30, 30}, SDL_Rect{420, 114, 30, 30}, SDL_Rect{390, 84, 30, 30}};
+    piece[1] = {SDL_Rect{420, 54, 30, 30}, SDL_Rect{420, 84, 30, 30}, SDL_Rect{420, 114, 30, 30}, SDL_Rect{390, 84, 30, 30}};
+    piece[2] = {SDL_Rect{360, 54, 30, 30}, SDL_Rect{390, 54, 30, 30}, SDL_Rect{420, 54, 30, 30}, SDL_Rect{390, 84, 30, 30}};
+    piece[3] = {SDL_Rect{360, 54, 30, 30}, SDL_Rect{360, 84, 30, 30}, SDL_Rect{360, 114, 30, 30}, SDL_Rect{390, 84, 30, 30}};
 }
 
 S::S() {

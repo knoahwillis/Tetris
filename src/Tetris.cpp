@@ -17,9 +17,7 @@ Tetris::Tetris(int h, int w) {
     next = new Next;
     hold = new Hold;
 
-
-    int test = rand() % 7;
-    switch (test) {
+    switch (rand() % 7) {
     case 0:
         currentPiece = new I;
         break;
@@ -92,6 +90,9 @@ void Tetris::turn() {
                 }
                 break;
             case SDL_SCANCODE_SPACE:
+                break;
+            case SDL_SCANCODE_TAB:
+                currentPiece = hold->switchPiece(currentPiece, next);
                 break;
             case SDL_SCANCODE_ESCAPE:
                 running = false;
