@@ -2,7 +2,6 @@
 #include <iostream>
 
 GameBoard::GameBoard() {
-    border = {270, 115, 300, 600};
     for (int i = 0; i < piecesInPlace.size(); i++) {
         for (int j = 0; j < piecesInPlace[i].size(); j++) {
             if (j == 0 || j == 11) {
@@ -17,6 +16,7 @@ GameBoard::GameBoard() {
 GameBoard::~GameBoard() {}
 
 void GameBoard::render(SDL_Renderer* rend) {
+    border = {270, 115, 300, 600};
 
     for (int i = 0; i < piecesInPlace.size(); i++) {
         for (int j = 0; j < piecesInPlace[i].size(); j++) {

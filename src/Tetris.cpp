@@ -101,11 +101,7 @@ void Tetris::turn() {
         }
     }
 
-    if (currentPiece->current()[0].y + 30 >= 715 || currentPiece->current()[1].y + 30 >= 715 || currentPiece->current()[2].y + 30 >= 715 ||
-        currentPiece->current()[3].y + 30 >= 715) {
-        game->putInPlace(currentPiece);
-        currentPiece = next->insertPiece();
-    } else if (currentPiece->collision(game->piecesInPlace)) {
+    if (currentPiece->collision(game->piecesInPlace)) {
         game->putInPlace(currentPiece);
         currentPiece = next->insertPiece();
     } else {
