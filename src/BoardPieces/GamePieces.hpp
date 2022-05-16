@@ -7,6 +7,7 @@
 class Piece {
 protected:
     int pieceOrientation;
+    int fallSpeed;
 
 public:
     std::array<std::array<SDL_Rect, 4>, 4> piece;
@@ -22,6 +23,7 @@ public:
     Piece movedLeft();
 
     void moveDown();
+    void moveDownFast();
 
     void rotateRight();
     void rotateLeft();
@@ -32,7 +34,7 @@ public:
 
     std::array<SDL_Rect, 4> current();
 
-    bool collision(std::array<std::array<Color, 12>, 20> piecesInPlace);
+    bool collision(std::array<std::array<Color, 12>, 21> piecesInPlace);
 };
 
 class I : public Piece {

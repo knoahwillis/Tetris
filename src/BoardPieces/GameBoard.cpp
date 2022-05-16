@@ -6,6 +6,8 @@ GameBoard::GameBoard() {
         for (int j = 0; j < piecesInPlace[i].size(); j++) {
             if (j == 0 || j == 11) {
                 piecesInPlace[i][j] = BORDER;
+            } else if (i == 20) {
+                piecesInPlace[i][j] = BORDER;
             } else {
                 piecesInPlace[i][j] = NONE;
             }
@@ -18,7 +20,7 @@ GameBoard::~GameBoard() {}
 void GameBoard::render(SDL_Renderer* rend) {
     border = {270, 115, 300, 600};
 
-    for (int i = 0; i < piecesInPlace.size(); i++) {
+    for (int i = 0; i < piecesInPlace.size() - 1; i++) {
         for (int j = 0; j < piecesInPlace[i].size(); j++) {
             switch (piecesInPlace[i][j]) {
             case CYAN:
@@ -80,7 +82,7 @@ void GameBoard::checkIfLine() {
 }
 
 void GameBoard::printBoard() {
-    for (int i = 0; i < 20; i++) {
+    for (int i = 0; i < 21; i++) {
         for (int j = 0; j < 12; j++) {
             std::cout << piecesInPlace[i][j] << " ";
         }

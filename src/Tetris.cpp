@@ -6,6 +6,7 @@ Tetris::Tetris(int h, int w) {
     width = w;
 
     running = true;
+    fallFast = false;
 
     SDL_Init(SDL_INIT_VIDEO);
     window = SDL_CreateWindow("Tetris", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, width, height, SDL_WINDOW_SHOWN);
@@ -90,6 +91,7 @@ void Tetris::turn() {
                 }
                 break;
             case SDL_SCANCODE_SPACE:
+                fallFast = !fallFast;
                 break;
             case SDL_SCANCODE_TAB:
                 currentPiece = hold->switchPiece(currentPiece, next);
@@ -104,8 +106,10 @@ void Tetris::turn() {
     if (currentPiece->collision(game->piecesInPlace)) {
         game->putInPlace(currentPiece);
         currentPiece = next->insertPiece();
-    } else {
+    } else if (!fallFast){
         currentPiece->moveDown();
+    } else {
+        currentPiece->moveDownFast();
     }
 
     game->checkIfLine();
@@ -126,8 +130,10 @@ void Tetris::render() {
         hold->render(rend, width / 2 - 290, 250);
         currentPiece->render(rend);
 
-        this->turn();
+        turn();
 
         SDL_RenderPresent(rend);
+
+        SDL_Delay(1000 / 60);
     }
 }

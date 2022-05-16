@@ -12,6 +12,7 @@ class Tetris {
     int height, width;
 
     bool running;
+    bool fallFast;
 
     SDL_Renderer* rend;
     SDL_Window* window;

@@ -25,6 +25,8 @@ void Hold::render(SDL_Renderer* rend, int xOffset, int yOffset) {
         xOffset += 30;
     }
 
+    yOffset += 90;
+
     switch (heldPiece) {
     case NONE:
         break;
@@ -33,7 +35,7 @@ void Hold::render(SDL_Renderer* rend, int xOffset, int yOffset) {
         for (int y = 0; y < 2; y++) {
             for (int x = 0; x < 4; x++) {
                 if (pieceI[4 * y + x] == 1) {
-                    SDL_Rect r{x * 30, yOffset + y * 30, 30, 30};
+                    SDL_Rect r{x * 30 + 120, yOffset + y * 30, 30, 30};
                     SDL_RenderFillRect(rend, &r);
                 }
             }
@@ -45,7 +47,7 @@ void Hold::render(SDL_Renderer* rend, int xOffset, int yOffset) {
         for (int y = 0; y < 2; y++) {
             for (int x = 0; x < 4; x++) {
                 if (pieceO[4 * y + x] == 1) {
-                    SDL_Rect r{x * 30, yOffset + y * 30, 30, 30};
+                    SDL_Rect r{x * 30 + 120, yOffset + y * 30, 30, 30};
                     SDL_RenderFillRect(rend, &r);
                 }
             }
@@ -57,7 +59,7 @@ void Hold::render(SDL_Renderer* rend, int xOffset, int yOffset) {
         for (int y = 0; y < 2; y++) {
             for (int x = 0; x < 4; x++) {
                 if (pieceT[4 * y + x] == 1) {
-                    SDL_Rect r{x * 30, yOffset + y * 30, 30, 30};
+                    SDL_Rect r{x * 30 + 120, yOffset + y * 30, 30, 30};
                     SDL_RenderFillRect(rend, &r);
                 }
             }
@@ -69,7 +71,7 @@ void Hold::render(SDL_Renderer* rend, int xOffset, int yOffset) {
         for (int y = 0; y < 2; y++) {
             for (int x = 0; x < 4; x++) {
                 if (pieceS[4 * y + x] == 1) {
-                    SDL_Rect r{x * 30, yOffset + y * 30, 30, 30};
+                    SDL_Rect r{x * 30 + 120, yOffset + y * 30, 30, 30};
                     SDL_RenderFillRect(rend, &r);
                 }
             }
@@ -81,7 +83,7 @@ void Hold::render(SDL_Renderer* rend, int xOffset, int yOffset) {
         for (int y = 0; y < 2; y++) {
             for (int x = 0; x < 4; x++) {
                 if (pieceZ[4 * y + x] == 1) {
-                    SDL_Rect r{x * 30, yOffset + y * 30, 30, 30};
+                    SDL_Rect r{x * 30 + 120, yOffset + y * 30, 30, 30};
                     SDL_RenderFillRect(rend, &r);
                 }
             }
@@ -93,7 +95,7 @@ void Hold::render(SDL_Renderer* rend, int xOffset, int yOffset) {
         for (int y = 0; y < 2; y++) {
             for (int x = 0; x < 4; x++) {
                 if (pieceJ[4 * y + x] == 1) {
-                    SDL_Rect r{x * 30, yOffset + y * 30, 30, 30};
+                    SDL_Rect r{x * 30 + 120, yOffset + y * 30, 30, 30};
                     SDL_RenderFillRect(rend, &r);
                 }
             }
@@ -105,7 +107,7 @@ void Hold::render(SDL_Renderer* rend, int xOffset, int yOffset) {
         for (int y = 0; y < 2; y++) {
             for (int x = 0; x < 4; x++) {
                 if (pieceL[4 * y + x] == 1) {
-                    SDL_Rect r{x * 30, yOffset + y * 30, 30, 30};
+                    SDL_Rect r{x * 30 + 120, yOffset + y * 30, 30, 30};
                     SDL_RenderFillRect(rend, &r);
                 }
             }

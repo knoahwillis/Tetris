@@ -31,10 +31,19 @@ Piece Piece::movedLeft() {
 
 void Piece::moveDown() {
     for (int i = 0; i < 4; i++) {
-        piece[i][0].y += 1;
-        piece[i][1].y += 1;
-        piece[i][2].y += 1;
-        piece[i][3].y += 1;
+        piece[i][0].y += fallSpeed;
+        piece[i][1].y += fallSpeed;
+        piece[i][2].y += fallSpeed;
+        piece[i][3].y += fallSpeed;
+    }
+}
+
+void Piece::moveDownFast() {
+    for (int i = 0; i < 4; i++) {
+        piece[i][0].y += 4 * fallSpeed;
+        piece[i][1].y += 4 * fallSpeed;
+        piece[i][2].y += 4 * fallSpeed;
+        piece[i][3].y += 4 * fallSpeed;
     }
 }
 
@@ -104,8 +113,7 @@ void Piece::render(SDL_Renderer* rend) {
 }
 
 
-
-bool Piece::collision(std::array<std::array<Color, 12>, 20> piecesInPlace) {
+bool Piece::collision(std::array<std::array<Color, 12>, 21> piecesInPlace) {
     int j, k;
     for (int i = 0; i < 4; i++) {
         j = ((piece[pieceOrientation][i].y + 30) / 30) - (115 / 30);
@@ -117,7 +125,10 @@ bool Piece::collision(std::array<std::array<Color, 12>, 20> piecesInPlace) {
     return false;
 }
 
-Piece::Piece() { pieceOrientation = 0; }
+Piece::Piece() {
+    pieceOrientation = 0;
+    fallSpeed = 1;
+}
 
 Piece::~Piece() {}
 
