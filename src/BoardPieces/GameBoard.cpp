@@ -1,5 +1,4 @@
 #include "GameBoard.hpp"
-#include <iostream>
 
 GameBoard::GameBoard() {
     for (int i = 0; i < piecesInPlace.size(); i++) {
@@ -68,7 +67,7 @@ void GameBoard::putInPlace(Piece* piece) {
     }
 }
 
-void GameBoard::checkIfLine() {
+bool GameBoard::checkIfLine() {
     for (int i = 19; i >= 0; i--) {
         if (piecesInPlace[i][1] != NONE && piecesInPlace[i][2] != NONE && piecesInPlace[i][3] != NONE && piecesInPlace[i][4] != NONE &&
             piecesInPlace[i][5] != NONE && piecesInPlace[i][6] != NONE && piecesInPlace[i][7] != NONE && piecesInPlace[i][8] != NONE &&
@@ -76,9 +75,10 @@ void GameBoard::checkIfLine() {
             for (int j = i; j > 0; j--) {
                 piecesInPlace[j] = piecesInPlace[j - 1];
             }
-            return;
+            return true;
         }
     }
+    return false;
 }
 
 void GameBoard::printBoard() {

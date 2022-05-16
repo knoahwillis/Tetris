@@ -1,4 +1,5 @@
 #include "Score.hpp"
+#include <iostream>
 
 Score::Score() {}
 
@@ -25,3 +26,7 @@ void Score::render(SDL_Renderer* rend, int xOffset, int yOffset) {
         xOffset += 30;
     }
 }
+
+void Score::updateScore(int update) { score += update; }
+
+void Score::printScore() { std::cout << score; }

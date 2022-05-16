@@ -106,13 +106,15 @@ void Tetris::turn() {
     if (currentPiece->collision(game->piecesInPlace)) {
         game->putInPlace(currentPiece);
         currentPiece = next->insertPiece();
-    } else if (!fallFast){
+    } else if (!fallFast) {
         currentPiece->moveDown();
     } else {
         currentPiece->moveDownFast();
     }
 
-    game->checkIfLine();
+    if (game->checkIfLine()) {
+        score->updateScore(100);
+    }
     if (game->checkIfLost()) {
         running = false;
     }

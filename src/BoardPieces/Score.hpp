@@ -36,7 +36,7 @@ const int text[5][20] = {
     };
     // clang-format on
 
-    int score;
+    int score = 0;
 
 public:
     Score();
@@ -45,5 +45,7 @@ public:
     void render(SDL_Renderer* rend, int xOffset, int yOffset);
 
     int getScore();
-    bool updateScore(int update);
+    void updateScore(int update);
+
+    void printScore();
 };

@@ -21,7 +21,7 @@ public:
 
     void printBoard();
 
-    void checkIfLine();
+    bool checkIfLine();
 
     bool checkIfLost();
 };
