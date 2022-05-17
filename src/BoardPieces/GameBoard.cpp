@@ -81,15 +81,6 @@ bool GameBoard::checkIfLine() {
     return false;
 }
 
-void GameBoard::printBoard() {
-    for (int i = 0; i < 21; i++) {
-        for (int j = 0; j < 12; j++) {
-            std::cout << piecesInPlace[i][j] << " ";
-        }
-        std::cout << "\n";
-    }
-}
-
 bool GameBoard::checkIfLost() {
     for (int i = 1; i < 10; i++) {
         if (piecesInPlace[0][i] != NONE && piecesInPlace[0][i] != BORDER) {

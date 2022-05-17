@@ -19,8 +19,6 @@ public:
 
     void putInPlace(Piece* piece);
 
-    void printBoard();
-
     bool checkIfLine();
 
     bool checkIfLost();
