@@ -10,7 +10,8 @@ class GameBoard {
 public:
     std::array<std::array<Color, 12>, 21> piecesInPlace;
 
-    SDL_Rect border;
+    const SDL_Rect border{270, 115, 300, 600};
+
 
     GameBoard();
     ~GameBoard();

@@ -5,6 +5,7 @@
 #include "BoardPieces/Next.hpp"
 #include "BoardPieces/Score.hpp"
 #include "BoardPieces/Title.hpp"
+#include "BoardPieces/Controls.hpp"
 #include <vector>
 
 
@@ -22,6 +23,7 @@ class Tetris {
     Score* score;
     Next* next;
     Hold* hold;
+    Controls* controls;
 
     Piece* currentPiece;
 

@@ -115,6 +115,7 @@ void Hold::render(SDL_Renderer* rend, int xOffset, int yOffset) {
         SDL_SetRenderDrawColor(rend, 255, 255, 255, 255);
         break;
     }
+    SDL_RenderDrawRect(rend, &holdBorder);
 }
 
 Piece* Hold::switchPiece(Piece* p, Next* next) {

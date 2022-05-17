@@ -70,6 +70,8 @@ class Hold {
 
     Color heldPiece = NONE;
 
+    const SDL_Rect holdBorder = {100, 300, 150, 160};
+
 public:
     Hold();
     ~Hold();

@@ -10,7 +10,7 @@ class Next {
          1, 1, 0, 1,
          1, 1, 0, 1,
          1, 0, 1, 1,
-         1, 0, 1, 1,},
+         1, 0, 1, 1},
 
         {1, 1, 1, 1, 
          1, 1, 0, 0,
@@ -68,7 +68,7 @@ class Next {
     // clang-format on
     std::vector<Piece*> nextPieces;
 
-    SDL_Rect border = {595, 150, 130, 350};
+    const SDL_Rect nextBorder = {595, 150, 130, 350};
 
 public:
     Next();

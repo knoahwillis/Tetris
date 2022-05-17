@@ -41,7 +41,7 @@ Next::~Next() {
 
 void Next::render(SDL_Renderer* rend, int xOffset, int yOffset) {
     SDL_SetRenderDrawColor(rend, 255, 255, 255, 255);
-    SDL_RenderDrawRect(rend, &border);
+    SDL_RenderDrawRect(rend, &nextBorder);
 
     for (int i = 0; i < 4; i++) {
         for (int y = 0; y < 5; y++) {

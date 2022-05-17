@@ -38,7 +38,8 @@ class Title {
          1, 0, 0, 0,
          1, 1, 1, 1,
          0, 0, 0, 1,
-         1, 1, 1, 1}};
+         1, 1, 1, 1}
+         };
     // clang-format on
     
 public:

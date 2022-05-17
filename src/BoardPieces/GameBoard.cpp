@@ -17,7 +17,6 @@ GameBoard::GameBoard() {
 GameBoard::~GameBoard() {}
 
 void GameBoard::render(SDL_Renderer* rend) {
-    border = {270, 115, 300, 600};
 
     for (int i = 0; i < piecesInPlace.size() - 1; i++) {
         for (int j = 0; j < piecesInPlace[i].size(); j++) {
@@ -43,8 +42,8 @@ void GameBoard::render(SDL_Renderer* rend) {
             case ORANGE:
                 SDL_SetRenderDrawColor(rend, 255, 165, 0, 255);
                 break;
-            case WHITE:
-                SDL_SetRenderDrawColor(rend, 255, 255, 255, 255);
+            case BORDER:
+                SDL_SetRenderDrawColor(rend, 0, 0, 0, 255);
                 break;
             case NONE:
                 SDL_SetRenderDrawColor(rend, 0, 0, 0, 255);

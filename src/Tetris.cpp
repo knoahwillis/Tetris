@@ -17,6 +17,7 @@ Tetris::Tetris(int h, int w) {
     score = new Score;
     next = new Next;
     hold = new Hold;
+    controls = new Controls;
 
     switch (rand() % 7) {
     case 0:
@@ -49,6 +50,7 @@ Tetris::~Tetris() {
     delete score;
     delete next;
     delete hold;
+    delete controls;
 
     delete currentPiece;
 
@@ -125,6 +127,7 @@ void Tetris::render() {
         SDL_SetRenderDrawColor(rend, 0, 0, 0, 255);
         SDL_RenderClear(rend);
 
+        controls->render(rend, width / 2 - 325, 550);
         game->render(rend);
         title->render(rend, width / 2 - 170, 25);
         score->render(rend, width / 2 - 300, 100);
