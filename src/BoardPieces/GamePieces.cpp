@@ -1,5 +1,5 @@
 #include "GamePieces.hpp"
-#include <iostream>
+
 
 void Piece::moveRight() {
     for (int i = 0; i < 4; i++) {
@@ -29,21 +29,21 @@ Piece Piece::movedLeft() {
     return ret;
 }
 
-void Piece::moveDown() {
+void Piece::moveDown(Score* score) {
     for (int i = 0; i < 4; i++) {
-        piece[i][0].y += fallSpeed;
-        piece[i][1].y += fallSpeed;
-        piece[i][2].y += fallSpeed;
-        piece[i][3].y += fallSpeed;
+        piece[i][0].y += score->gameSpeed;
+        piece[i][1].y += score->gameSpeed;
+        piece[i][2].y += score->gameSpeed;
+        piece[i][3].y += score->gameSpeed;
     }
 }
 
-void Piece::moveDownFast() {
+void Piece::moveDownFast(Score* score) {
     for (int i = 0; i < 4; i++) {
-        piece[i][0].y += 4 * fallSpeed;
-        piece[i][1].y += 4 * fallSpeed;
-        piece[i][2].y += 4 * fallSpeed;
-        piece[i][3].y += 4 * fallSpeed;
+        piece[i][0].y += 4 * score->gameSpeed;
+        piece[i][1].y += 4 * score->gameSpeed;
+        piece[i][2].y += 4 * score->gameSpeed;
+        piece[i][3].y += 4 * score->gameSpeed;
     }
 }
 
@@ -125,10 +125,7 @@ bool Piece::collision(std::array<std::array<Color, 12>, 21> piecesInPlace) {
     return false;
 }
 
-Piece::Piece() {
-    pieceOrientation = 0;
-    fallSpeed = 1;
-}
+Piece::Piece() { pieceOrientation = 0; }
 
 Piece::~Piece() {}
 

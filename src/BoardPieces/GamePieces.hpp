@@ -1,5 +1,6 @@
 #pragma once
 #include "../Color.hpp"
+#include "Score.hpp"
 #include <SDL2/SDL.h>
 #include <array>
 #include <vector>
@@ -7,10 +8,12 @@
 class Piece {
 protected:
     int pieceOrientation;
-    int fallSpeed;
+
 
 public:
     std::array<std::array<SDL_Rect, 4>, 4> piece;
+
+    int fallSpeed;
 
     Color color;
 
@@ -22,8 +25,8 @@ public:
     Piece movedRight();
     Piece movedLeft();
 
-    void moveDown();
-    void moveDownFast();
+    void moveDown(Score* score);
+    void moveDownFast(Score* score);
 
     void rotateRight();
     void rotateLeft();

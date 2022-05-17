@@ -82,3 +82,7 @@ void Score::updateScore(int update) {
     scoreInt += update;
     score = std::to_string(scoreInt);
 }
+
+int Score::getScore() {
+    return std::stoi(score);
+}

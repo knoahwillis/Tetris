@@ -109,6 +109,7 @@ public:
     void render(SDL_Renderer* rend, int xOffset, int yOffset);
 
     int getScore();
+    int gameSpeed = 1;
     void updateScore(int update);
 
     void printScore();
